@@ -11,6 +11,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy source code
 COPY main.py .
 
+COPY train_model.py .
+
+# Run the training script to generate model.pkl
+RUN python train_model.py
+
 # Expose port
 EXPOSE 8080
 

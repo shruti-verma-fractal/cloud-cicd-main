@@ -5,8 +5,13 @@ import numpy as np
 app = Flask(__name__)
 
 # Load the model
-with open('model.pkl', 'rb') as f:
-  model = pickle.load(f)
+try:
+    with open('model.pkl', 'rb') as f:
+        model = pickle.load(f)
+    print("Model loaded successfully")
+except Exception as e:
+    print(f"Error loading model: {e}")
+    # You might want to exit here, or handle the error in another way
 
 @app.route('/')
 def home():
@@ -18,6 +23,6 @@ def predict():
   features = np.array(data['features']).reshape(1, -1)
   prediction = model.predict(features)
   return jsonify({'predicted_sales': prediction[0]})
-  
+
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=8080)
