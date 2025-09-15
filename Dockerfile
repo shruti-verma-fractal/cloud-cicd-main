@@ -15,6 +15,4 @@ COPY main.py .
 EXPOSE 8080
 
 # Run the app
-CMD ["python", "train_model.py"]
-
 CMD ["python", "main.py"]
